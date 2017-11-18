@@ -36,7 +36,7 @@ python manage.py runserver 172.16.4.104:8000
 
 The folllowing URLs are available in this application:
 
-* To scan QR codes at real time
+* To scan QR codes in real time
 
 ```
 http://$HOSTNAME:$PORT/scanner
