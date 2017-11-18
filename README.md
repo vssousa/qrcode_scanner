@@ -26,7 +26,7 @@ cd $ROOT_DIRECTORY
 python manage.py runserver
 ```
 
-If you would like to test in a mobile device, it is necessary to enable external accesses (considering the port 8000) in your firewall security configurations. Moreover, the Django initialization commandline should be replaced, as follows:
+If you would like to test it in a mobile device, it is necessary to enable external accesses (considering the port 8000) in your firewall security configurations. Moreover, the Django initialization commandline should be replaced, as follows:
 
 ```
 python manage.py runserver 172.16.4.104:8000
