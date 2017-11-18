@@ -1,0 +1,32 @@
+{% extends 'scanner/base.html' %}
+
+{% block content %}
+    {% if database_message %}<p><strong>{{ database_message }}</strong></p>{% endif %}
+    {% if error_message %}<p style="color: red"><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <video id="preview"></video>
+
+    <script type="text/javascript">
+        var myRedirect = function(redirectUrl, arg, value) {
+          var form = $('<form action="' + redirectUrl + '" method="post">' + "{% csrf_token %}" +
+          '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+          $('body').append(form);
+          $(form).submit();
+        };
+
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+        var redirect = '';
+        myRedirect(redirect, "message", content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+{% endblock %}
